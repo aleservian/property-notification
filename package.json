@@ -1,0 +1,27 @@
+{
+  "name": "property-notification",
+  "version": "0.0.1",
+  "description": "real time notification",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aleservian/property-notification.git"
+  },
+  "keywords": [
+    "realtime"
+  ],
+  "author": "aleservian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aleservian/property-notification/issues"
+  },
+  "dependencies": {
+    "express": "~4.10.6",
+    "jade": "~1.8.2",
+    "body-parser": "~1.10.0",
+    "mongoose": "~3.8.21"
+  }
+}
