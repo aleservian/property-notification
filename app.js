@@ -6,6 +6,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose=require('mongoose'),
     routes=require('./routes/routes.js'),
+    sockets=require('./socket/socket.js'),
     db=mongoose.connection;
 /******CONNECT DB*****/
 mongoose.connect('mongodb://localhost/notification');
@@ -24,18 +25,7 @@ app.use(express.static(__dirname + '/public'));
 /******ROUTES*********/
 routes.main(app,router);
 /******REALTIME********/
-var visitas = 0;
-/*io.enable('browser client minification');*/
-io.sockets.on('connection',function(socket){
-    visitas++;
-    socket.emit('visits', visitas);
-    socket.broadcast.emit('visits', visitas);
-    socket.on('disconnect', function(){
-        visitas--;
-        // Atualiza o total de visitas para os demais usuários.
-        socket.broadcast.emit('visits', visitas);
-    });
-})
+sockets.main(io);
 /*****INIT SERVER******/
 server.listen(8000,function(){
 	console.log("Notification 8000");

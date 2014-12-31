@@ -11,5 +11,11 @@ exports.main=function(app,router){
 	router.route("/api/v1/homes/:id")
 	   .get(homesController.retrieve) 
 
+	router.route('/api/v1/notification')
+	   .get(homesController.listNotification)   
+
+    router.route('/api/v1/notification/count')
+	   .get(homesController.countNotification)   
+
 	app.use('/',router);
 }
