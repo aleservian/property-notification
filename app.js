@@ -1,6 +1,8 @@
 var express = require('express'),
     router=express.Router(),
     app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io')(server),
     bodyParser = require('body-parser'),
     mongoose=require('mongoose'),
     routes=require('./routes/routes.js'),
@@ -21,6 +23,20 @@ app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 /******ROUTES*********/
 routes.main(app,router);
-app.listen(8000,function(){
+/******REALTIME********/
+var visitas = 0;
+/*io.enable('browser client minification');*/
+io.sockets.on('connection',function(socket){
+    visitas++;
+    socket.emit('visits', visitas);
+    socket.broadcast.emit('visits', visitas);
+    socket.on('disconnect', function(){
+        visitas--;
+        // Atualiza o total de visitas para os demais usuários.
+        socket.broadcast.emit('visits', visitas);
+    });
+})
+/*****INIT SERVER******/
+server.listen(8000,function(){
 	console.log("Notification 8000");
 });

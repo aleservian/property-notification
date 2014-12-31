@@ -24,7 +24,7 @@
     "body-parser": "~1.10.0",
     "mongoose": "~3.8.21",
     "slug": "~0.8.0",
-    "browserify": "~8.0.2"
+    "socket.io": "~1.2.1"
   },
   "devDependencies": {
     "gulp": "~3.8.10",
